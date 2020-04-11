@@ -1,51 +1,36 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Login In</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        {% extends "base.html" %}
 
-       {% block content %}
-       <a href="{{ url_for('register') }}">Click Here To register</a><br>
-       <h1>Sign In</h1>
-        <form action="" method="POST" novalidate>
-            {{form.hidden_tag()}}
-            <p>
-                {{form.username.label}}<br>
-                {{form.username(size = 32)}}<br>
-                {% for error in form.username.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
+{% extends "base.html" %}
 
-            <p>
-                {{form.password.label}}<br>
-                {{form.password(size = 32)}}<br>
-                {% for error in form.password.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
+{% block content %}
+<a href="{{ url_for('register') }}">Click Here To register</a><br>
+<h1>Sign In</h1>
+<form action="" method="POST" novalidate>
+    {{form.hidden_tag()}}
+    <p>
+        {{form.username.label}}<br>
+        {{form.username(size = 32)}}<br>
+        {% for error in form.username.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
 
-            </p>
+    <p>
+        {{form.password.label}}<br>
+        {{form.password(size = 32)}}<br>
+        {% for error in form.password.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
 
-            <p>
-                {{form.remember_me()}} {{form.remember_me.label}}
-            </p>
+    </p>
 
-            <p>
-                {{form.submit()}}
-            </p>
+    <p>
+        {{form.remember_me()}} {{form.remember_me.label}}
+    </p>
 
-        </form>
-       {% endblock %}
-        <script src="" async defer></script>
-    </body>
-</html>
+    <p>
+        {{form.submit()}}
+    </p>
+
+</form>
+{% endblock %}
+<script src="" async defer></script>
