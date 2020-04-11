@@ -1,36 +1,54 @@
 
+
 {% extends "base.html" %}
 
 {% block content %}
-<a href="{{ url_for('register') }}">Click Here To register</a><br>
+
+<style>
+  .card{
+    position: fixed;
+  top: 50%;
+  left: 50%;
+  background-color: wheat;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+  }
+</style>
+
+<div class="col-xs-1" align = "center">
+<div class="card" style="width: 30rem;">
 <h1>Sign In</h1>
+<div class="card-body">
 <form action="" method="POST" novalidate>
     {{form.hidden_tag()}}
-    <p>
-        {{form.username.label}}<br>
-        {{form.username(size = 32)}}<br>
-        {% for error in form.username.errors %}
+    <div class="form-group" >
+      <label for="exampleInputEmail1">{{form.username.label}}</label><br>
+      {{form.username(size = 32)}}
+      {% for error in form.username.errors %}
+      <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">{{form.password.label}}</label><br>
+      {{form.password(size = 32)}}
+      {% for error in form.password.errors %}
         <span style="color: red;">[{{ error }}]</span>
         {% endfor %}
-    </p>
-
-    <p>
-        {{form.password.label}}<br>
-        {{form.password(size = 32)}}<br>
-        {% for error in form.password.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-
-    </p>
-
+    </div>
     <p>
         {{form.remember_me()}} {{form.remember_me.label}}
     </p>
 
     <p>
-        {{form.submit()}}
+        {{form.submit(class = "btn btn-primary")}}
     </p>
+  </form>
+  <a href="{{ url_for('register') }}">Click Here To register</a><br>
+</div>
+</div>
+</div>
 
-</form>
 {% endblock %}
 <script src="" async defer></script>
+
+
