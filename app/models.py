@@ -40,7 +40,7 @@ class User(UserMixin, db.Model):
     
     def follow(self, user):
         if not self.is_following(user):
-        self.followed.append(user)
+            self.followed.append(user)
 
     def unfollow(self, user):
         if self.is_following(user):
@@ -51,17 +51,11 @@ class User(UserMixin, db.Model):
             followers.c.followed_id == user.id).count() > 0
     
     def followed_posts(self):
-
-        # The posts of the followers
-        followed =  Post.query.join(
-            followers, (followers.c.followed_id == Post.user_id)).filter(
-                followers.c.follower_id == self.id).order_by(
-                    Post.timestamp.desc())
-        
-        # The posts of the users themselves
-        own = Posts.query.filter_by(Posts.user_id = self.id)
+        followed = Posts.query.join(
+            followers, (followers.c.followed_id == Posts.user_id)).filter(
+                followers.c.follower_id == self.id)
+        own = Posts.query.filter_by(user_id=self.id)
         return followed.union(own).order_by(Posts.timestamp.desc())
-        
 
 class Posts(db.Model):
     id = db.Column(db.Integer, primary_key = True)
