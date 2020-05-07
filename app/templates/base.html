@@ -20,6 +20,7 @@
           
               <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
             {% else %}
+            <a class="nav-item nav-link" href="{{ url_for('explore') }}">Explore</a>
             <a class="nav-item nav-link" href="{{url_for('user', username = current_user.username)}}">Profile</a>
             <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
            {% endif %}
